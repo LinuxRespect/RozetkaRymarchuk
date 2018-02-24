@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -80,7 +81,7 @@ public class ParentTest {
     public TestName testName = new TestName();
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException, IOException, ClassNotFoundException {
         File file = new File("");
         //  logger.info ("path file ="+ file);
 
@@ -100,7 +101,7 @@ public class ParentTest {
             logger.info("Chrome will be started ");
            /* File fileFF = new File(".././drivers/chromedriver");
             System.setProperty("webdriver.chrome.driver", fileFF.getAbsolutePath());*/
-            System.setProperty("webdriver.chrome.driver", "E:\\RozetkaRymarchuk\\src\\test\\resources\\drivers\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "E:\\CopyRozetkaOlehRym\\src\\test\\resources\\drivers\\chromedriver.exe");
             webDriver = new ChromeDriver();
             logger.info(" Chrome is started");
         } else if ("iedriver".equals(browser)) {
@@ -158,7 +159,7 @@ public class ParentTest {
 
 
     @After
-    public void tearDown() {
+    public void tearDown() throws SQLException {
         if (!(webDriver==null)) {
             if (!isTestPass) {
                 utils.screenShot(pathToScreenShot, webDriver);
