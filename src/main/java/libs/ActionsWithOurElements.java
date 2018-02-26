@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -233,4 +234,20 @@ public class ActionsWithOurElements {
         book.close();
 
     }
+
+   /* public Map searchNameAndPriceInRange(int minValue, int maxValue) {
+        Map nameAndPriceInRange = new HashMap();
+        ArrayList<WebElement> pages = new ArrayList<WebElement>();
+        pages.add(numberPage2);
+        pages.add(numberPage3);
+        pages.add(numberPage4);
+        pages.add(numberPage5);
+        for (WebElement element : pages) {
+            addToMap(nameAndPriceInRange);
+            actionsWithOurElements.clickOnInvisibleElement(element);
+
+        }
+        addToMap(nameAndPriceInRange);
+        return sortByValue(nameAndPriceInRange);
+    }*/
 }

@@ -88,8 +88,6 @@ public class MobilePhonePage extends ParentPage {
         }
         addToMap(nameAndPriceInRange);
         return sortByValue(nameAndPriceInRange);
-
-
     }
 
     public Map addTopSaleToMapList(Map topSales) throws InterruptedException {

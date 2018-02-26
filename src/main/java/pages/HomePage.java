@@ -12,6 +12,8 @@ public class HomePage extends ParentPage {
 
     @FindBy(xpath=".//*[@href='https://rozetka.com.ua/telefony-tv-i-ehlektronika/c4627949/']")
     private WebElement sectionElectronics;
+    @FindBy(xpath = ".//*[@href='https://rozetka.com.ua/tovary-dlya-doma/c2394287/']")
+    private WebElement elementProductForHome;
 
     public void openUrl(String nameUrl) {
         open(nameUrl);
@@ -19,5 +21,9 @@ public class HomePage extends ParentPage {
 
     public void moveToSectionPhoneTVAndElectronics() {
         actionsWithOurElements.clickOnElement(sectionElectronics);
+    }
+
+    public void clickOnProductsForHome() {
+        actionsWithOurElements.clickOnElement(elementProductForHome);
     }
 }

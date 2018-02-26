@@ -1,4 +1,5 @@
 package parentTest;
+import dbTest.TestDataBase;
 import libs.Utils;
 import org.junit.After;
 import org.junit.Assert;
@@ -15,10 +16,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.HomePage;
-import pages.MobilePhonePage;
-import pages.TelefonyPage;
-import pages.TelethonElectronicPage;
+import pages.*;
 
 
 import java.io.File;
@@ -52,6 +50,10 @@ public class ParentTest {
     public TelethonElectronicPage telefonTvElektronika;
     public TelefonyPage telefonyPage;
     public MobilePhonePage mobilePhone;
+    public ProductsForHomePage productsForHomePage;
+    public HouseHoldChemicalPage houseHoldChemicalPage;
+    public SredstvaStirkiPage sredstvaStirkiPage;
+
 
 
 
@@ -151,6 +153,10 @@ public class ParentTest {
         telefonTvElektronika = new TelethonElectronicPage(webDriver);
         telefonyPage = new TelefonyPage(webDriver);
         mobilePhone =new MobilePhonePage(webDriver);
+        productsForHomePage =new ProductsForHomePage(webDriver);
+        houseHoldChemicalPage =new HouseHoldChemicalPage(webDriver);
+        sredstvaStirkiPage = new SredstvaStirkiPage(webDriver);
+
 
         webDriverWait10 = new WebDriverWait(webDriver,10);
 
