@@ -1,5 +1,6 @@
 package TestSuite;
 
+import libs.SendEmail;
 import org.junit.Test;
 import parentTest.ParentTest;
 
@@ -12,11 +13,14 @@ public class Case1 extends ParentTest {
 
     @Test
     public void case1() throws InterruptedException {
-        homePage.openUrl(currentUrl);
+      /*  homePage.openUrl(currentUrl);
         homePage.moveToSectionPhoneTVAndElectronics();
         telefonTvElektronika.moveToTelefony();
         telefonyPage.moveToMobilePhone();
-        mobilePhone.writeToFileNamesDeviceFrom3Pages();
+        mobilePhone.writeToFileNamesDeviceFrom3Pages();*/
+        SendEmail s= new SendEmail();
+        s.sendEmail();
+
 
     }
 }
