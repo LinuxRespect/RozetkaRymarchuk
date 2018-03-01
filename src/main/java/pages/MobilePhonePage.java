@@ -4,11 +4,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -40,10 +37,11 @@ public class MobilePhonePage extends ParentPage {
     private WebElement imageTopSale;
     @FindBy(xpath = ".//*[@class='g-price-uah']")
     private WebElement elementsPrice;
+    String titleNamePhones = ".//div[@class = 'g-i-tile-i-title clearfix']//a";
+    String elementsPriceLocator = ".//*[@class='g-price-uah']";
 
 
-    public void writeToFileNamesDeviceFrom3Pages() throws InterruptedException {
-        String titleNamePhones = ".//div[@class = 'g-i-tile-i-title clearfix']//a";
+    public void writeToFileNamesDeviceFrom3Pages(File file) throws InterruptedException {
         ArrayList<String> listNameDevices = new ArrayList<String>();
         ArrayList<WebElement> pages = new ArrayList<WebElement>();
         pages.add(numberPage2);
@@ -54,13 +52,12 @@ public class MobilePhonePage extends ParentPage {
         }
 
         actionsWithOurElements.addToList(listNameDevices);
-        actionsWithOurElements.writeListToFile(listNameDevices);
+        actionsWithOurElements.writeListToFile(listNameDevices,file);
 
     }
 
 
     public Map chooseNameAndPriceTopSaleFrom3Page() throws InterruptedException {
-        //   open("https://rozetka.com.ua/mobile-phones/c80003/page=1;preset=smartfon/");
         Map topSales = new HashMap();
         ArrayList<WebElement> pages = new ArrayList<WebElement>();
         pages.add(numberPage2);
@@ -95,21 +92,17 @@ public class MobilePhonePage extends ParentPage {
         Thread.sleep(5000);
         final int expectHeightImageTopSale = 42;
         final int expectWidthImageTopSale = 105;
-        String titleNamePhones = ".//div[@class = 'g-i-tile-i-title clearfix']//a";
-        String elementsPrice = ".//*[@class='g-price-uah']";
-        String imageWithSizeTopSale = ".//*[@name  ='prices_active_element_original']";
+        String imageWithSizeTopSale = ".//*[@name ='prices_active_element_original']";
         int count = actionsWithOurElements.areElementsPresent(titleNamePhones);
         int j = 0;
         for (int i = 0; i < count; i++) {
             webDriver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
             String textFromElement = webDriver.findElements(By.xpath(titleNamePhones)).get(i).getText();
-            String price = webDriver.findElements(By.xpath(elementsPrice)).get(i).getText();
+            String price = webDriver.findElements(By.xpath(elementsPriceLocator)).get(i).getText();
             j = i * 2;
             if ((j % 2) == 0) {
                 Dimension sizeImageTopSale = webDriver.findElements(By.xpath(imageWithSizeTopSale)).get(j).getSize();
                 if ((sizeImageTopSale.getHeight() == expectHeightImageTopSale) && (sizeImageTopSale.getWidth() == expectWidthImageTopSale)) {
-//                    logger.info("textFromElement=" + textFromElement);
-//                    logger.info("price =" + price);
                     topSales.put(textFromElement, parsePrise(price));
                 }
             }
@@ -123,21 +116,15 @@ public class MobilePhonePage extends ParentPage {
         Thread.sleep(5000);
         final int minValueRange = 3000;
         final int maxValueRange = 6000;
-        String elementsPrice = ".//*[@class='g-price-uah']";
-        String titleNamePhones = ".//div[@class = 'g-i-tile-i-title clearfix']//a";
-        int count = actionsWithOurElements.areElementsPresent(elementsPrice);
+        int count = actionsWithOurElements.areElementsPresent(elementsPriceLocator);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         for (int i = 0; i < count; i++) {
             String price;
             webDriver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-            price = webDriver.findElements(By.xpath(elementsPrice)).get(i).getText();
+            price = webDriver.findElements(By.xpath(elementsPriceLocator)).get(i).getText();
             if ((parsePrise(price) > minValueRange) && (parsePrise(price) < maxValueRange)) {
                 String textFromElement = webDriver.findElements(By.xpath(titleNamePhones)).get(i).getText();
-               // logger.info("Name element=" + textFromElement);
-                // logger.info("Price =" + parsePrise(price));
                 nameAndPriceInRange.put(textFromElement, parsePrise(price));
-
-
             }
         }
         return nameAndPriceInRange;

@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import static libs.ConfigData.getCfgValue;
+
 
 public class Case2 extends ParentTest {
     public Case2(String browser) {
@@ -26,7 +28,7 @@ public class Case2 extends ParentTest {
 
     @Test
     public void case2() throws SQLException, InterruptedException, IOException, ClassNotFoundException {
-        homePage.open("https://rozetka.com.ua/");
+        homePage.open(getCfgValue("Home_Page_Rozetka"));
         homePage.clickOnProductsForHome();
         productsForHomePage.clickOnHouseholdChemical();
         houseHoldChemicalPage.clickOnsredstvaStirki();
@@ -36,10 +38,8 @@ public class Case2 extends ParentTest {
         dbMySQL = new Database("MySQL_PADB_DB", "MySQL");
         dbMySQL.changeDB("Delete from Products");
         logger.info("select table =" + dbMySQL.selectTable("select * from Products"));
-        // dbMySQL.changeDB("ALTER TABLE Products DROP COLUMN id");
         Set<Entry<String, Integer>> entries = map.entrySet();
         logger.info("entries=" + entries);
-       // int i = 100;
         for (Entry<String, Integer> entry : entries) {
 
             dbMySQL.insert(entry.getKey(), entry.getValue());

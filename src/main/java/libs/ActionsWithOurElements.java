@@ -183,11 +183,10 @@ public class ActionsWithOurElements {
         logger.info("list= " + list);
     }
 
-    public void writeListToFile(ArrayList<String> list) {
-        File file = new File("E:\\RozetkaOlehRym\\src\\test\\resources\\listNamesSmartPhone.txt");
+    public void writeListToFile(ArrayList<String> list,File f) {
         FileWriter fr = null;
         try {
-            fr = new FileWriter(file);
+            fr = new FileWriter(f);
             fr.write(String.valueOf(list));
             fr.flush();
             logger.info("write to file");

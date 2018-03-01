@@ -11,7 +11,8 @@ public class HouseHoldChemicalPage extends ParentPage {
     public HouseHoldChemicalPage(WebDriver webDriver) {
         super(webDriver);
     }
-    @FindBy(xpath = ".//*[text()='Для стирки']")
+    @FindBy(xpath = ".//*[@href='http://rozetka.com.ua/sredstva-dlya-stirki/c4625084/']")
+   // @FindBy(xpath = ".//*[text()='Для стирки']")
     private WebElement elementFotStirki;
 
     public void clickOnsredstvaStirki() {
